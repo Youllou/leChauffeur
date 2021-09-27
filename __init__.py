@@ -71,4 +71,4 @@ leChauffeur.add_cog(on_ready.on_ready(leChauffeur))
 
 
 if __name__ == '__main__':
-    leChauffeur.run("Nzc5MzQ2MTc2NTk5MTMwMTUy.X7fMsA.hlGyjIgBHlZ1_Uy1dbc2TFt6Y_Y")
+    leChauffeur.run("Token")
