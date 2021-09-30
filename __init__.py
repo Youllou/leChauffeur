@@ -36,7 +36,9 @@ command_listener = [add_role_message.add_role_message(leChauffeur),
                     bzzbzz.bzzbzz(leChauffeur),
                     react.react(leChauffeur),
                     sauce.sauce(leChauffeur),
-                    rand.rand(leChauffeur)]
+                    rand.rand(leChauffeur),
+                    shifumi.shifumi(leChauffeur),
+                    titan.titan(leChauffeur)]
 for command in command_listener:
     leChauffeur.add_cog(command)
 
