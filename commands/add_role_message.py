@@ -11,11 +11,11 @@ from ..lib import *
 
 class add_role_message(commands.Cog):
 
-    def __init__(self,bot):
+    def __init__(self, bot):
         self.leChauffeur = bot
 
     @commands.command()
-    async def ajoute_roleReaction(self,ctx,emoji,role):
+    async def ajoute_roleReaction(self, ctx, emoji, role):
         emoji_pattern = re.compile("["
                                    u"\U0001F600-\U0001F64F"  # emoticons
                                    u"\U0001F300-\U0001F5FF"  # symbols & pictographs

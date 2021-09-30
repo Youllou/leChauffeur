@@ -17,7 +17,7 @@ class bzzbzz(commands.Cog):
         self.leChauffeur = bot
 
     @commands.command()
-    async def bzzbzz(ctx):
+    async def bzzbzz(self, ctx):
         random.seed(a=None)
         with requests.get(ctx.message.author.avatar_url) as r:
             img_data = r.content
