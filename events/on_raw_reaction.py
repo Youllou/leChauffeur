@@ -1,6 +1,8 @@
+#discord import
 import discord
 from discord.ext import commands
 
+#local import
 from ..lib import *
 
 
@@ -50,7 +52,4 @@ class on_raw_reaction(commands.Cog):
                         return False,
             else:
                 return False,
-
-    @commands.command()
-    async def ajoute_roleReaction(self,ctx):
 

@@ -19,14 +19,14 @@ intents = discord.Intents.default()
 intents.members = True
 
 client = discord.Client()
-leChauffeur = commands.Bot(command_prefix='$',intents=intents)
+leChauffeur = commands.Bot(command_prefix='stp ',intents=intents)
 
 leChauffeur.remove_command('help')
 
 
 
 leChauffeur.add_cog(on_ready.on_ready(leChauffeur))
-
+leChauffeur.add_cog()
 
 
 
