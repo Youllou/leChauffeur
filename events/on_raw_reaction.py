@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands
 
 #local import
-from ..lib import *
+from lib import *
 
 
 class on_raw_reaction(commands.Cog):
@@ -30,8 +30,7 @@ class on_raw_reaction(commands.Cog):
         try:
             dat = get_info.get(f"./assets/{str(payload.guild_id)}/role_react.csv", '\a')
         except FileNotFoundError:
-            await self.leChauffeur.me.send(
-                f"erreur on_raw_reaction_add => FileNotFoundError for guild {self.leChauffeur.get_guild(payload.guild_id)}")
+            await self.leChauffeur.me.send(f"erreur on_raw_reaction_add => FileNotFoundError for guild {self.leChauffeur.get_guild(payload.guild_id)}")
         else:
             if len(dat) >= 1:
                 for row in dat:

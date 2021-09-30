@@ -24,6 +24,8 @@ leChauffeur.remove_command('help')
 
 # adding events_listener
 event_listener = [emote_only_listener.emote_only_listener(leChauffeur),
+                  on_guild_join.on_guild_join(leChauffeur),
+                  on_guild_remove.on_guild_remove(leChauffeur),
                   on_raw_reaction.on_raw_reaction(leChauffeur),
                   on_ready.on_ready(leChauffeur),
                   reactions_listener.reactions_listener(leChauffeur),
@@ -32,15 +34,35 @@ for event in event_listener:
     leChauffeur.add_cog(event)
 
 # adding commands_listener
-command_listener = [add_role_message.add_role_message(leChauffeur),
+command_listener = [active_react.active_react(leChauffeur),
+                    add_role_message.add_role_message(leChauffeur),
                     bzzbzz.bzzbzz(leChauffeur),
-                    react.react(leChauffeur),
-                    sauce.sauce(leChauffeur),
+                    goulag.goulag(leChauffeur),
                     rand.rand(leChauffeur),
+                    react.react(leChauffeur),
+                    regarde.regarde(leChauffeur),
+                    sauce.sauce(leChauffeur),
                     shifumi.shifumi(leChauffeur),
                     titan.titan(leChauffeur)]
 for command in command_listener:
     leChauffeur.add_cog(command)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if __name__ == '__main__':
-    leChauffeur.run("Token")
+    leChauffeur.run("Nzc5MzQ2MTc2NTk5MTMwMTUy.X7fMsA.gOegtP1Z0JNvbLEsTUg27DuTkCM")

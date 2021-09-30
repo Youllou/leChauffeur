@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands
 
 # local import
-from ..lib import *
+from lib import *
 
 
 class goulag(commands.Cog):
@@ -13,7 +13,8 @@ class goulag(commands.Cog):
 
     @commands.command()
     async def goulag_config(self,ctx,mention):
-        if ctx.author.guild_permissions.administrator:
+        command_chan = get_info.get(f'./assets/{str(ctx.guild.id)}/commandChan.csv', '\a')
+        if (not ctx.author.bot) and str(ctx.channel.id) in command_chan and ctx.author.guild_permissions.administrator:
             mention = int("".join(list(mention)[3:-1]))
 
             role = ctx.guild.get_role(mention)
@@ -32,7 +33,8 @@ class goulag(commands.Cog):
 
     @commands.command()
     async def goulag(self,ctx, mention):
-        if ctx.author.guild_permissions.administrator:
+        command_chan = get_info.get(f'./assets/{str(ctx.guild.id)}/commandChan.csv', '\a')
+        if (not ctx.author.bot) and str(ctx.channel.id) in command_chan and ctx.author.guild_permissions.administrator:
             goulag_file = f"assets/{str(ctx.guild.id)}/goulogs.csv"
             try :
                 get_info.get(goulag_file,"\a")

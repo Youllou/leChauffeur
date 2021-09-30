@@ -6,7 +6,7 @@ from discord.ext import commands
 import random
 
 #local import
-from ..lib import *
+from lib import *
 
 class reactions_listener(commands.Cog):
 
@@ -14,7 +14,7 @@ class reactions_listener(commands.Cog):
         self.leChauffeur = bot
 
     @commands.Cog.listener()
-    def on_message(self, msg):
+    async def on_message(self, msg):
         """
               this fonction react to certain message depending on
               what is in the reactions.csv file
@@ -38,18 +38,23 @@ class reactions_listener(commands.Cog):
         #
         #     await msg.channel.send(ttdl.dl(tiktokUrl))
 
-        reactions = []
-        random.seed(a=None)
+        active_react = get_info.get(f'./assets/{str(msg.guild.id)}/active_react.csv', '\a')
+        if (not msg.author.bot):
+            if active_react[0] == 'nulpart':
+                await self.leChauffeur.process_commands(msg)
+                return
+            elif active_react[0] == 'partout' or str(msg.channel.id) in active_react:
 
-        if msg.author.name != "Le chauffeur" and not msg.content.startswith("^^"):
-            reactions = get_info.get(f"./assets/{str(msg.guild.id)}/reaction")
+                random.seed(a=None)
 
-            for i in range(len(reactions)):
-                answer = []
-                if ((reactions[i][0].lower() in msg.content.lower() and " " in reactions[i][0]) or (
-                        (reactions[i][0].lower() in msg.content.lower().split() and " " not in reactions[i][0]))):
-                    for j in range(1, len(reactions[i])):
-                        answer.append(reactions[i][j].replace("\\n", "\n"))
-                    await msg.channel.send(random.choice(answer))
+                if not msg.author.bot and not msg.content.startswith("^^"):
+                    reactions = get_info.get(f"./assets/{str(msg.guild.id)}/reactions.csv","\a")
 
-        await self.leChauffeur.process_commands(msg)
+                    for i in range(len(reactions)):
+                        answer = []
+                        if ((reactions[i][0].lower() in msg.content.lower() and " " in reactions[i][0]) or (
+                                (reactions[i][0].lower() in msg.content.lower().split() and " " not in reactions[i][0]))):
+                            for j in range(1, len(reactions[i])):
+                                answer.append(reactions[i][j].replace("\\n", "\n"))
+                            await msg.channel.send(random.choice(answer))
+                await self.leChauffeur.process_commands(msg)

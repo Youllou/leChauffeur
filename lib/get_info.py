@@ -34,7 +34,7 @@ def get(filepath: str, splitter: str) -> list:
     """
 
     data = []
-    f = open(os.path.relpath(filepath, cur_path), "r", encoding="UTF-8")
+    f = open(filepath, "r", encoding="UTF-8")
     while 1:
         info = f.readline()
         if info == "":
@@ -58,14 +58,14 @@ def write(filepath: str, splitter: str, data: list):
 
     # getting original, if file not found then it will be created
     try :
-        f = open(os.path.relpath(filepath, cur_path), "r", encoding="UTF-8")
+        f = open(filepath, "r", encoding="UTF-8")
         base = f.read()
         f.close()
     except FileNotFoundError as e:
         print("File wasn't existing so has been created")
 
     # writing (if exception catch rewrite original)
-    f = open(os.path.relpath(filepath, cur_path), "w", encoding="UTF-8")
+    f = open(filepath, "w", encoding="UTF-8")
     try:
         if type(data[0]) != list:
             f.write(str(data[0]))
@@ -97,17 +97,20 @@ def append(filepath: str, splitter: str, data: list):
 
     # getting original
     base = get(filepath,splitter)
-
-    if type(base[0]) == type(data[0]):
-        new = base+data
-    elif type(base[0]) == list:
-        base.append(data)
-        new = base
+    print(len(base))
+    if len(base) == 0 :
+        write(filepath,splitter,data)
     else :
-        new = [base]+data
+        if type(base[0]) == type(data[0]):
+            new = base+data
+        elif type(base[0]) == list:
+            base.append(data)
+            new = base
+        else :
+            new = [base]+data
+        write(filepath,splitter,new)
 
 
-    write(filepath,splitter,new)
 
 
 if __name__ == '__main__':
