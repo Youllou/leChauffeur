@@ -2,14 +2,11 @@
 import discord
 from discord.ext import commands
 
-# global import
-import re
-
 # local import
 from ..lib import *
 
 
-class add_role_message(commands.Cog):
+class react(commands.Cog):
 
     def __init__(self, bot):
         self.leChauffeur = bot
@@ -42,40 +39,49 @@ class add_role_message(commands.Cog):
                 tmp += reactions[nline][cols]
             reactions[nline] = tmp
             for elmnt in reaction:
-                reactions[nline] += "\a" + elmnt
+                reactions[nline].append(elmnt)
             reactions[nline] += "\n"
-            get_info.write(path,'\a',reactions)
+            get_info.write(path, '\a', reactions)
 
         await ctx.message.delete()
 
     @commands.command()
     async def rm(self, ctx, toReact):
 
-        reactions = []
         exists = 0
+        path = f"./assets/{str(ctx.guild.id)}/reactions.csv"
 
-        f = open("assets/reactions.csv", "r", encoding="UTF-8")
-        while 1:
-            line = f.readline()
-            if line == "":
-                break
-            else:
-                reactions += [line.split(",")]
-        f.close()
+        # get data
+        reactions = get_info.get(path, '\a')
 
+        # search for element
         for i in range(len(reactions)):
             if toReact == reactions[i][0]:
                 nLine = i
                 exists = 1
                 break
 
+        # del line if exists
         if exists == 1:
-            f = open("assets/reactions.csv", "r", encoding="UTF-8")
-            text = f.readlines()
-            f.close()
-            text.pop(nLine)
-            f = open("assets/reactions.csv", "w", encoding="UTF-8")
-            f.writelines(text)
+            reactions.pop(nLine)
+            get_info.write(path, '\a', reactions)
             await ctx.message.delete()
         else:
             await ctx.send("Cette expression n'a pas été trouvé")
+
+    @commands.command()
+    async def reaction(self, ctx):
+
+        expression = ""
+        path = f"./assets/{str(ctx.guild.id)}/reactions.csv"
+
+        # get data
+        reactions = get_info.get(path, '\a')
+
+        for rows in reactions:
+            expression += str(rows[0]) + "\n"
+            print(rows[0])
+
+        sentence = discord.Embed(title="Voici l'ensemble des mots/expressions aux quels je réagis",
+                                 description=expression, color=0xecb683)
+        await ctx.send(embed=sentence)
