@@ -1,12 +1,13 @@
-#discord import
+# discord import
 import discord
 from discord.ext import commands
 
-#global import
+# global import
 import random
 
-#local import
+# local import
 from lib import *
+
 
 class reactions_listener(commands.Cog):
 
@@ -40,21 +41,17 @@ class reactions_listener(commands.Cog):
 
         active_react = get_info.get(f'./assets/{str(msg.guild.id)}/active_react.csv', '\a')
         if (not msg.author.bot):
-            if active_react[0] == 'nulpart':
-                await self.leChauffeur.process_commands(msg)
-                return
-            elif active_react[0] == 'partout' or str(msg.channel.id) in active_react:
-
+            if active_react[0] == 'partout' or str(msg.channel.id) in active_react:
                 random.seed(a=None)
 
-                if not msg.author.bot and not msg.content.startswith("^^"):
-                    reactions = get_info.get(f"./assets/{str(msg.guild.id)}/reactions.csv","\a")
+                if not msg.author.bot and not msg.content.startswith("stp "):
+                    reactions = get_info.get(f"./assets/{str(msg.guild.id)}/reactions.csv", "\a")
 
                     for i in range(len(reactions)):
                         answer = []
                         if ((reactions[i][0].lower() in msg.content.lower() and " " in reactions[i][0]) or (
-                                (reactions[i][0].lower() in msg.content.lower().split() and " " not in reactions[i][0]))):
+                                (reactions[i][0].lower() in msg.content.lower().split() and " " not in reactions[i][
+                                    0]))):
                             for j in range(1, len(reactions[i])):
                                 answer.append(reactions[i][j].replace("\\n", "\n"))
                             await msg.channel.send(random.choice(answer))
-                await self.leChauffeur.process_commands(msg)

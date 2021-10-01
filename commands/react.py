@@ -83,7 +83,6 @@ class react(commands.Cog):
 
             for rows in reactions:
                 expression += str(rows[0]) + "\n"
-                print(rows[0])
 
             sentence = discord.Embed(title="Voici l'ensemble des mots/expressions aux quels je réagis",
                                      description=expression, color=0xecb683)

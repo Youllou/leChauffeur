@@ -38,31 +38,18 @@ command_listener = [active_react.active_react(leChauffeur),
                     add_role_message.add_role_message(leChauffeur),
                     bzzbzz.bzzbzz(leChauffeur),
                     goulag.goulag(leChauffeur),
+                    help.help(leChauffeur),
                     rand.rand(leChauffeur),
                     react.react(leChauffeur),
                     regarde.regarde(leChauffeur),
                     sauce.sauce(leChauffeur),
+                    send.send(leChauffeur),
                     shifumi.shifumi(leChauffeur),
                     titan.titan(leChauffeur)]
+
 for command in command_listener:
     leChauffeur.add_cog(command)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 if __name__ == '__main__':
-    leChauffeur.run("Nzc5MzQ2MTc2NTk5MTMwMTUy.X7fMsA.gOegtP1Z0JNvbLEsTUg27DuTkCM")
+    leChauffeur.run("Nzc5MzQ2MTc2NTk5MTMwMTUy.X7fMsA.4gHTT5t52hw697LWMwvbRaV_H90")

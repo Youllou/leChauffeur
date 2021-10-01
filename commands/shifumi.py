@@ -18,7 +18,6 @@ class shifumi(commands.Cog):
     async def shifumi(self, ctx, who):
         command_chan = get_info.get(f'./assets/{str(ctx.guild.id)}/commandChan.csv', '\a')
         if (not ctx.author.bot) and str(ctx.channel.id) in command_chan:
-            winName
             if ctx.author.mention == who:
                 await ctx.send(
                     "Mec, si tu te sens seul on peut en parler... Mais je peux pas t'autoriser à jouer contre toi même...")
