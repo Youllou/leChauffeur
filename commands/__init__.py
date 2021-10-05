@@ -3,6 +3,7 @@ from . import add_role_message
 from . import bzzbzz
 from . import goulag
 from . import help
+from . import Music
 from . import rand
 from . import react
 from . import regarde
