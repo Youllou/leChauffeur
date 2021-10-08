@@ -28,7 +28,9 @@ class music(commands.Cog):
         self.url_queue.append(url)
         self.queue.append(len_queue)
         if len_queue == 0:
-            if ctx.voice_client is not None:
+            try:
+                ctx.voice_client.is_connected()
+            except AttributeError :
                 await self.join(ctx)
             async with ctx.typing():
                 self.dl(ctx, url,"0")

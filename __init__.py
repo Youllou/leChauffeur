@@ -46,11 +46,12 @@ command_listener = [active_react.active_react(leChauffeur),
                     sauce.sauce(leChauffeur),
                     send.send(leChauffeur),
                     shifumi.shifumi(leChauffeur),
-                    titan.titan(leChauffeur)]
+                    titan.titan(leChauffeur),
+                    voice_admin.voice_admin(leChauffeur)]
 
 for command in command_listener:
     leChauffeur.add_cog(command)
 
 
 if __name__ == '__main__':
-    leChauffeur.run("token")
+    leChauffeur.run("Nzc5MzQ2MTc2NTk5MTMwMTUy.X7fMsA.GMynmjUfaXHOhyogPEmHqg4RH5w")

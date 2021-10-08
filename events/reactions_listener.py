@@ -40,7 +40,7 @@ class reactions_listener(commands.Cog):
         #     await msg.channel.send(ttdl.dl(tiktokUrl))
 
         active_react = get_info.get(f'./assets/{str(msg.guild.id)}/active_react.csv', '\a')
-        if (not msg.author.bot):
+        if not msg.author.bot:
             if active_react[0] == 'partout' or str(msg.channel.id) in active_react:
                 random.seed(a=None)
 

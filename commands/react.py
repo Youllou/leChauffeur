@@ -19,6 +19,10 @@ class react(commands.Cog):
             i = 6
             path = f"./assets/{str(ctx.guild.id)}/reactions.csv"
 
+            # convert reaction
+            print(reaction)
+            print(list(reaction))
+
             # get data
             reactions = get_info.get(path, '\a')
 
@@ -31,7 +35,7 @@ class react(commands.Cog):
 
             # if the first expression doesn't exits we just write all the message
             if exist == 0:
-                get_info.append(path, '\a', [toReact] + reaction)
+                get_info.append(path, '\a', [toReact] + list(reaction))
 
             # else, we take only the reactions part and add it to the already existing line
             else:
