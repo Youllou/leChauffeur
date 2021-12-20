@@ -41,6 +41,7 @@ class reactions_listener(commands.Cog):
 
         active_react = get_info.get(f'./assets/{str(msg.guild.id)}/active_react.csv', '\a')
         if not msg.author.bot:
+            print(msg.guild)
             if active_react[0] == 'partout' or str(msg.channel.id) in active_react:
                 random.seed(a=None)
 

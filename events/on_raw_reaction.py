@@ -1,8 +1,8 @@
-#discord import
+# discord import
 import discord
 from discord.ext import commands
 
-#local import
+# local import
 from lib import *
 
 
@@ -31,31 +31,29 @@ class on_raw_reaction(commands.Cog):
             role = self.leChauffeur.get_guild(payload.guild_id).get_role(roleid)
             await user.remove_roles(role)
 
-
-
-
     async def test(self, payload):
         try:
             dat = get_info.get(f"./assets/{str(payload.guild_id)}/role_react.csv", '\a')
         except FileNotFoundError:
-            await self.leChauffeur.me.send(f"erreur on_raw_reaction_add => FileNotFoundError for guild {self.leChauffeur.get_guild(payload.guild_id)}")
+            await self.leChauffeur.me.send(
+                f"erreur on_raw_reaction_add => FileNotFoundError for guild {self.leChauffeur.get_guild(payload.guild_id)}")
         else:
             if type(dat[0]) == list:
                 print("bcp de data")
                 for row in dat:
-                    isgood = await self.testline(row,payload)
+                    isgood = await self.testline(row, payload)
                     if isgood[0]:
                         return isgood
 
             elif dat is not None:
                 print("pas bcp de data")
-                return await self.testline(dat,payload)
+                return await self.testline(dat, payload)
 
             else:
                 print("nik")
                 return False,
 
-    async def testline(self,row,payload):
+    async def testline(self, row, payload):
         # 3 tests => could write them in if ... and ... and... format but too long
 
         if int(row[0]) == payload.message_id:
@@ -67,13 +65,8 @@ class on_raw_reaction(commands.Cog):
                     print(True)
                     return True, user, row[2]
                 else:
-                    print("bot")
                     return False,
             else:
-                print("not emoji")
                 return False,
         else:
-            print("not message")
-            print(payload.message_id)
-            print(row[0])
             return False,

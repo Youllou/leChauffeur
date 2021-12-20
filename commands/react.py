@@ -29,20 +29,16 @@ class react(commands.Cog):
             # verifying if the first expression already exists or not
             for i in range(len(reactions)):
                 if toReact.lower() == str(reactions[i][0]).lower():
-                    exist = 1
+                    exist = True
                     nline = i
                     break
 
             # if the first expression doesn't exits we just write all the message
-            if exist == 0:
+            if not exist:
                 get_info.append(path, '\a', [toReact] + list(reaction))
 
             # else, we take only the reactions part and add it to the already existing line
             else:
-                tmp = ""
-                for cols in range(len(reactions[nline]) - 1):
-                    tmp += reactions[nline][cols]
-                reactions[nline] = tmp
                 for elmnt in reaction:
                     reactions[nline].append(elmnt)
                 reactions[nline] += "\n"
