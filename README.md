@@ -1,5 +1,5 @@
 # leChauffeur
-A french discord Bot
+A french discord Bot<br>
 link to add to server : https://discord.com/api/oauth2/authorize?client_id=779346176599130152&permissions=8&scope=bot
 ## Here come the HELP
 between {} : optionals argument , between [] : required arguments<br>
