@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands
 
 # global imports
-import time, random, contextlib, io, shutil, os, requests, sys, asyncio
+import time, random, contextlib, io, shutil, os, requests, sys, asyncio, webbrowser, threading
 import importlib as imp
 from PIL import Image, ImageDraw
 
@@ -39,19 +39,19 @@ command_listener = [active_react.active_react(leChauffeur),
                     bzzbzz.bzzbzz(leChauffeur),
                     goulag.goulag(leChauffeur),
                     help.help(leChauffeur),
-                    Music.music(leChauffeur),
+                    Music.Music(leChauffeur),
                     rand.rand(leChauffeur),
                     react.react(leChauffeur),
                     regarde.regarde(leChauffeur),
                     sauce.sauce(leChauffeur),
                     send.send(leChauffeur),
                     shifumi.shifumi(leChauffeur),
+                    test.test(leChauffeur),
                     titan.titan(leChauffeur),
                     voice_admin.voice_admin(leChauffeur)]
 
 for command in command_listener:
     leChauffeur.add_cog(command)
 
-
 if __name__ == '__main__':
-    leChauffeur.run("Nzc5MzQ2MTc2NTk5MTMwMTUy.X7fMsA.GMynmjUfaXHOhyogPEmHqg4RH5w")
+    leChauffeur.run(os.environ['token'])

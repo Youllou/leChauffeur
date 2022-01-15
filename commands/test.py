@@ -1,4 +1,6 @@
 # discord import
+import asyncio
+
 import discord
 from discord.ext import commands
 
@@ -17,8 +19,14 @@ class test(commands.Cog):
 
     @commands.command()
     async def test(self, ctx):
-        print("commande test :")
-        print(ctx)
-        msg = await ctx.send("réagis pour tester")
-        await msg.add_reaction('\N{THUMBS UP SIGN}')
-        self.leChauffeur.test = msg.id
+        await ctx.send("stp join")
+        await asyncio.sleep(2)
+        await ctx.send("stp leave")
+        await asyncio.sleep(2)
+        await ctx.send("stp join")
+        await asyncio.sleep(2)
+        await ctx.send("stp play https://www.youtube.com/watch?v=eZTQ5L_su8M&ab_channel=funk")
+        await asyncio.sleep(2)
+        await ctx.send("stp play du propre")
+        await asyncio.sleep(2)
+        await ctx.send("stp queue")
