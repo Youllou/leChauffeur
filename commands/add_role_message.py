@@ -1,12 +1,13 @@
-#discord import
+# discord import
 import discord
 from discord.ext import commands
 
-#global import
+# global import
 import re
 
-#local import
+# local import
 from lib import *
+
 
 class add_role_message(commands.Cog):
 
@@ -15,8 +16,10 @@ class add_role_message(commands.Cog):
 
     @commands.command()
     async def ajoute_roleReaction(self, ctx, emoji, role):
-        command_chan = get_info.get(f'./assets/{str(ctx.guild.id)}/commandChan.csv','\a')
-        if (not ctx.author.bot) and str(ctx.channel.id) in command_chan :
+
+        command_chan = get_info.get(f'./assets/{str(ctx.guild.id)}/commandChan.csv', '\a')
+        if (not ctx.author.bot) and str(ctx.channel.id) in command_chan:
+            num = "0123456789"
             emoji_pattern = re.compile("["
                                        u"\U0001F600-\U0001F64F"  # emoticons
                                        u"\U0001F300-\U0001F5FF"  # symbols & pictographs
@@ -27,18 +30,32 @@ class add_role_message(commands.Cog):
                                        "]+", flags=re.UNICODE)
             if ctx.author.guild_permissions.administrator:
                 try:
-                    old = get_info.get(f"./assets/{str(ctx.guild.id)}/role_react.csv",'\a')
+                    old = get_info.get(f"./assets/{str(ctx.guild.id)}/role_react.csv", '\a')
                 except FileNotFoundError:
-                    await self.leChauffeur.me.send(f"erreur ajoute_roleReaction => FileNotFoundError for guild {ctx.guild.id}")
+                    await self.leChauffeur.me.send(
+                        f"erreur ajoute_roleReaction => FileNotFoundError for guild {ctx.guild.id}")
                 else:
                     if ctx.message.reference is None:
                         await ctx.send("Veuillez répondre au message que vous voulez ajouter en commande de réaction")
-                    elif type(emoji) == discord.Emoji or emoji_pattern.search(emoji) is None:
-                        await ctx.send("Désolé, la commande ne prend pas encore en compte les emojis personalisé\nCa arrivera un jour ne vous inquiétez pas")
+
+                    elif emoji_pattern.search(emoji) is None and not (emoji[0] == "<" and emoji[3] not in num):
+                        print(emoji)
+                        await ctx.send("Mais... c'est pas un émoji ça... Non mais ho !")
+
                     elif ctx.guild.get_role(int(role[3:-1])) is None:
-                        await ctx.send("Woopsi, le role que tu as donné n'a pas été trouvé\nN'hésite pas a faire un petit stp aide_moi pour avoir des infos sur les commandes")
-                    else :
-                        original = await ctx.channel.fetch_message(ctx.message.reference.message_id)
-                        newDat = [original.id,emoji,int(role[3:-1])]
-                        get_info.append(f"./assets/{str(ctx.guild.id)}/role_react.csv",'\a',newDat)
-                        await original.add_reaction(emoji)
+                        await ctx.send(
+                            "Woopsi, le role que tu as donné n'a pas été trouvé\n"
+                            "N'hésite pas a faire un petit stp aide_moi pour avoir des infos sur les commandes")
+
+                    else:
+                        emoji = get_emoji_id.get_emoji_id(emoji)
+                        emoji_object = self.leChauffeur.get_emoji(int(emoji))
+                        if emoji_object is None :
+                            await ctx.send("Arf... désolé, j'ai pas accés au serveur qui a cet émoji...")
+                        else :
+                            original = await ctx.channel.fetch_message(ctx.message.reference.message_id)
+                            newDat = [original.id, emoji, int(role[3:-1])]
+                            get_info.append(f"./assets/{str(ctx.guild.id)}/role_react.csv", '\a', newDat)
+                            await original.add_reaction(emoji_object)
+
+

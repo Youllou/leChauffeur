@@ -10,5 +10,6 @@ from . import regarde
 from . import sauce
 from . import send
 from . import shifumi
+from . import test
 from . import titan
 from . import voice_admin
