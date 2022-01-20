@@ -51,7 +51,7 @@ class Music(commands.Cog):
                     self.dl(ctx, yt)
                     await ctx.send(f"Et hop, {yt.title} de {yt.author} ajouté à la suite")
 
-    @commands.command(aliases=['next'])
+    @commands.command(aliases=['next','skip'])
     async def next_song(self, ctx):
         # os.remove(f"./assets/{str(ctx.guild.id)}/music/{str(self.queue[0])}.webm")
         self.queue.pop(0)
