@@ -38,21 +38,21 @@ class reactions_listener(commands.Cog):
         #     tiktokUrl = "".join(msglisted)
         #
         #     await msg.channel.send(ttdl.dl(tiktokUrl))
+        if msg.guild != None:
+            active_react = get_info.get(f'./assets/{str(msg.guild.id)}/active_react.csv', '\a')
+            if not msg.author.bot:
+                print(msg.guild)
+                if active_react[0] == 'partout' or str(msg.channel.id) in active_react:
+                    random.seed(a=None)
 
-        active_react = get_info.get(f'./assets/{str(msg.guild.id)}/active_react.csv', '\a')
-        if not msg.author.bot:
-            print(msg.guild)
-            if active_react[0] == 'partout' or str(msg.channel.id) in active_react:
-                random.seed(a=None)
+                    if not msg.author.bot and not msg.content.startswith("stp "):
+                        reactions = get_info.get(f"./assets/{str(msg.guild.id)}/reactions.csv", "\a")
 
-                if not msg.author.bot and not msg.content.startswith("stp "):
-                    reactions = get_info.get(f"./assets/{str(msg.guild.id)}/reactions.csv", "\a")
-
-                    for i in range(len(reactions)):
-                        answer = []
-                        if ((reactions[i][0].lower() in msg.content.lower() and " " in reactions[i][0]) or (
-                                (reactions[i][0].lower() in msg.content.lower().split() and " " not in reactions[i][
-                                    0]))):
-                            for j in range(1, len(reactions[i])):
-                                answer.append(reactions[i][j].replace("\\n", "\n"))
-                            await msg.channel.send(random.choice(answer))
+                        for i in range(len(reactions)):
+                            answer = []
+                            if ((reactions[i][0].lower() in msg.content.lower() and " " in reactions[i][0]) or (
+                                    (reactions[i][0].lower() in msg.content.lower().split() and " " not in reactions[i][
+                                        0]))):
+                                for j in range(1, len(reactions[i])):
+                                    answer.append(reactions[i][j].replace("\\n", "\n"))
+                                await msg.channel.send(random.choice(answer))

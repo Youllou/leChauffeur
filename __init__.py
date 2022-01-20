@@ -37,6 +37,7 @@ for event in event_listener:
 command_listener = [active_react.active_react(leChauffeur),
                     add_role_message.add_role_message(leChauffeur),
                     bzzbzz.bzzbzz(leChauffeur),
+                    getLog.getLog(leChauffeur),
                     goulag.goulag(leChauffeur),
                     help.help(leChauffeur),
                     Music.Music(leChauffeur),
