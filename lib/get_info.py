@@ -73,7 +73,6 @@ def write(filepath: str, splitter: str, data: list):
             for i in data:
                 f.write(splitter + str(i))
         else:
-            print(data)
             for i in data:
                 f.write(str(i[0]))
                 i.pop(0)
@@ -98,11 +97,9 @@ def append(filepath: str, splitter: str, data: list):
 
     # getting original
     base = get(filepath,splitter)
-    print(len(base))
     if len(base) == 0 :
         write(filepath,splitter,data)
     else :
-        print(data)
         if type(base[0]) == type(data[0]):
             new = base+data
         elif type(base[0]) == list:

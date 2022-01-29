@@ -1,6 +1,6 @@
 def get_emoji_id(emoji):
     num = "0123456789"
-
+    print(emoji)
     if emoji[0] == "<" and emoji[3] not in num:
         id_start = 3
     else:

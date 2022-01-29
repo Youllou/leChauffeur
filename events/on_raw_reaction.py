@@ -1,4 +1,5 @@
 # discord import
+from typing import Tuple
 import discord
 from discord.ext import commands
 
@@ -31,7 +32,7 @@ class on_raw_reaction(commands.Cog):
             role = self.leChauffeur.get_guild(payload.guild_id).get_role(int(roleid))
             await user.remove_roles(role)
 
-    async def test(self, payload) -> ():
+    async def test(self, payload) -> Tuple:
         try:
             dat = get_info.get(f"./assets/{str(payload.guild_id)}/role_react.csv", '\a')
         except FileNotFoundError:
@@ -44,27 +45,25 @@ class on_raw_reaction(commands.Cog):
                     if isgood[0]:
                         return isgood
                 return False,
+
             elif dat is not None:
                 return await self.testline(dat, payload)
 
             else:
-                print("nik")
                 return False,
 
-    async def testline(self, row, payload) -> ():
+    async def testline(self, row, payload) -> Tuple:
         # 3 tests => could write them in if ... and ... and... format but too long
 
         if int(row[0]) == payload.message_id:
-            current_message = await self.leChauffeur.get_channel(payload.channel_id).fetch_message(
-                payload.message_id)
-            if str(payload.emoji.id) == row[1]:
+            if str(payload.emoji.id) == row[1] or ( payload.emoji.id == None and payload.emoji.name == row[1] ):
                 user = await self.leChauffeur.get_guild(payload.guild_id).fetch_member(payload.user_id)
+
                 if not user.bot:
-                    print(True)
                     return True, user, row[2]
                 else:
                     return False,
             else:
-                return False,
+                return False,    
         else:
             return False,
