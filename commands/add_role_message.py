@@ -18,17 +18,15 @@ class add_role_message(commands.Cog):
     async def ajoute_roleReaction(self, ctx, emoji, role):
 
         command_chan = get_info.get(f'./assets/{str(ctx.guild.id)}/commandChan.csv', '\a')
-        if (not ctx.author.bot) and str(ctx.channel.id) in command_chan:
+        if (not ctx.author.bot):
             num = "0123456789"
             emoji_pattern = re.compile("["
-                                       u"\U0001F600-\U0001F64F"  # emoticons
-                                       u"\U0001F300-\U0001F5FF"  # symbols & pictographs
-                                       u"\U0001F680-\U0001F6FF"  # transport & map symbols
-                                       u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
-                                       u"\U00002702-\U000027B0"
-                                       u"\U000024C2-\U0001F251"
+                                       u"\U00002600-\U000027BF"
+                                       u"\U0001F000-\U0001FBF9"  # emoticons
                                        "]+", flags=re.UNICODE)
+            print(ctx.author.guild_permissions.administrator)
             if ctx.author.guild_permissions.administrator:
+                
                 try:
                     old = get_info.get(f"./assets/{str(ctx.guild.id)}/role_react.csv", '\a')
                 except FileNotFoundError:
@@ -38,8 +36,6 @@ class add_role_message(commands.Cog):
                     if ctx.message.reference is None:
                         await ctx.send("Veuillez répondre au message que vous voulez ajouter en commande de réaction")
 
-                    elif emoji_pattern.search(emoji) is None and not (emoji[0] == "<" and emoji[3] not in num):
-                        await ctx.send("Mais... c'est pas un émoji ça... Non mais ho !")
 
                     elif ctx.guild.get_role(int(role[3:-1])) is None:
                         await ctx.send(
@@ -60,5 +56,6 @@ class add_role_message(commands.Cog):
                         newDat = [original.id, emoji, int(role[3:-1])]
                         get_info.append(f"./assets/{str(ctx.guild.id)}/role_react.csv", '\a', newDat)
                         await original.add_reaction(emoji_object)
+                        await ctx.message.delete()
 
 

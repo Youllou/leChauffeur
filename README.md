@@ -7,10 +7,10 @@ stp is a shortcut for s'il te plait meaning please.<br>
 I thought it was funny to ask politly to the bot to do things<br>
 <br>
 ### reactions
- stp add `[word/expression to react to]` `[reactions]` (if one single `expression` contain spaces you've got to suround it by quotes, you can add more than a `reaction` by seperating each by a space)<br>
+ stp ajoute_reaction `[word/expression to react to]` `[reactions]` (if one single `expression` contain spaces you've got to suround it by quotes, you can add more than a `reaction` by seperating each by a space)<br>
  adds a `word/expression` which the bot will react to with one of the give `reactions`<br>
 <br>
-stp rm `[word/expression to remove]`<br>
+stp retire_reaction `[word/expression to remove]`<br>
 removes a `word/expression` from the reaction list<br>
 <br>
 stp reaction<br>

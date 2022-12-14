@@ -30,11 +30,10 @@ class titan(commands.Cog):
             if usr is None:
                 await ctx.send("utilisateur introuvable")
             else:
-                with requests.get(usr.avatar_url_as(format='png')) as r:
-                    img_data = r.content
-                with open(f'assets/{str(ctx.guild.id)}/pfp.png', 'wb') as handler:
-                    handler.write(img_data)
-
+                data = await usr.display_avatar.read()
+                with open(f'./assets/{str(ctx.guild.id)}/pfp.png', 'wb') as f:
+                    f.write(data)
+                    
                 titan = random.randrange(1, 5)
                 if titan == 1:
                     x = 360

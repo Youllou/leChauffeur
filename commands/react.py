@@ -47,7 +47,7 @@ class react(commands.Cog):
             await ctx.message.delete()
 
     @commands.command()
-    async def rm(self, ctx, toReact):
+    async def retire_reaction(self, ctx, toReact):
         command_chan = get_info.get(f'./assets/{str(ctx.guild.id)}/commandChan.csv', '\a')
         if (not ctx.author.bot) and str(ctx.channel.id) in command_chan:
             exists = 0

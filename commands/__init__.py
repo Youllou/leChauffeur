@@ -1,6 +1,7 @@
 from . import active_react
 from . import add_role_message
 from . import bzzbzz
+from . import genshin
 from . import getLog
 from . import goulag
 from . import help

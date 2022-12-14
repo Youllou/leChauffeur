@@ -6,7 +6,7 @@ from discord.ext import commands
 from lib import *
 
 # global import
-import random, requests, os
+import random, os
 from PIL import Image, ImageDraw
 
 
@@ -32,10 +32,10 @@ class bzzbzz(commands.Cog):
                 await ctx.send("utilisateur introuvable")
             else:
                 random.seed(a=None)
-                with requests.get(usr.avatar_url) as r:
-                    img_data = r.content
-                with open(f'./assets/{str(ctx.guild.id)}/pfp.png', 'wb') as handler:
-                    handler.write(img_data)
+
+                data = await usr.display_avatar.read()
+                with open(f'./assets/{str(ctx.guild.id)}/pfp.png', 'wb') as f:
+                    f.write(data)
 
                 bee = random.randrange(1, 4)
                 if bee == 1:

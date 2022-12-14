@@ -1,3 +1,3 @@
 #!/bin/bash
 echo ~~~~~~~~~`date`~~~~~~~~~ >> /home/ubuntu/leChauffeur/Bot.log
-python3 /home/ubuntu/leChauffeur/__init__.py &>> /home/ubuntu/leChauffeur/Bot.log
+python3 /home/ubuntu/leChauffeur/__init__.py &>> /home/ubuntu/leChauffeur/Bot.log &

@@ -12,3 +12,4 @@ def build(guild):
     f = open(f"./assets/{str(guild.id)}/commandChan.csv", 'w', encoding='UTF-8')
     f = open(f"./assets/{str(guild.id)}/active_react.csv", 'w', encoding='UTF-8')
     f = open(f"./assets/{str(guild.id)}/score.csv", 'w', encoding='UTF-8')
+    f= open(f"./assets/{str(guild.id)}/pfp.png", 'w')

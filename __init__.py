@@ -14,29 +14,29 @@ from events import *
 # local import
 from lib import *
 
-intents = discord.Intents.default()
-intents.members = True
+intents = discord.Intents.all()
 
-client = discord.Client()
+client = discord.Client(intents=intents)
 leChauffeur = commands.Bot(command_prefix='stp ', intents=intents)
 
 leChauffeur.remove_command('help')
 
 # adding events_listener
 event_listener = [emote_only_listener.emote_only_listener(leChauffeur),
+                  on_error.on_error(leChauffeur),
                   on_guild_join.on_guild_join(leChauffeur),
                   on_guild_remove.on_guild_remove(leChauffeur),
                   on_raw_reaction.on_raw_reaction(leChauffeur),
                   on_ready.on_ready(leChauffeur),
                   reactions_listener.reactions_listener(leChauffeur),
                   RoleIncrementor.RoleIncrementor(leChauffeur)]
-for event in event_listener:
-    leChauffeur.add_cog(event)
+
 
 # adding commands_listener
 command_listener = [active_react.active_react(leChauffeur),
                     add_role_message.add_role_message(leChauffeur),
                     bzzbzz.bzzbzz(leChauffeur),
+                    genshin.genshin(leChauffeur),
                     getLog.getLog(leChauffeur),
                     goulag.goulag(leChauffeur),
                     help.help(leChauffeur),
@@ -51,9 +51,13 @@ command_listener = [active_react.active_react(leChauffeur),
                     titan.titan(leChauffeur),
                     voice_admin.voice_admin(leChauffeur)]
 
-for command in command_listener:
-    leChauffeur.add_cog(command)
-
 
 if __name__ == '__main__':
-    leChauffeur.run(os.environ['token'])
+
+    for event in event_listener:
+        asyncio.run(leChauffeur.add_cog(event))
+
+    for command in command_listener:
+        asyncio.run(leChauffeur.add_cog(command))
+
+    leChauffeur.run(os.environ['token_Chauffeur'])
