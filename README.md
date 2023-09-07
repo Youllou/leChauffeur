@@ -65,3 +65,8 @@ stp send [message]<br>
 will send a message for you<br>
 very usefull for the command just above<br>
 A french discord Bot
+
+
+
+
+aaaa
