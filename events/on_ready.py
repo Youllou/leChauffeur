@@ -7,6 +7,7 @@ from lib import createarbo
 
 #global import
 import os
+import sys
 
 class on_ready(commands.Cog):
     def __init__(self, bot):
@@ -14,11 +15,10 @@ class on_ready(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        gw2 = self.leChauffeur.get_guild(779434463834275841)
+        gw2 = self.leChauffeur.get_guild(818160428294471700)
         self.leChauffeur.me = gw2.get_member(280464892258025473)
-        # dict = gw2.get_role(818160600593072158)
-        # print(dict)
-        # await self.leChauffeur.me.add_roles(dict)
+        quebec = gw2.get_role(1011287598230159410)
+        touriste = gw2.get_role(819875308987351041)
         guilds = self.leChauffeur.guilds
         for i in guilds:
             if str(i.id) not in os.listdir("./assets"):

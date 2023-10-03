@@ -23,6 +23,7 @@ class Music(commands.Cog):
 
     @commands.command()
     async def join(self, ctx):
+        await ctx.send(f"Et hop, me voilà dans {ctx.author.voice.channel}")
         await ctx.author.voice.channel.connect()
 
     @commands.command(aliases=["resume","add"])

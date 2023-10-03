@@ -1,3 +1,3 @@
 #!/bin/bash
-/home/ubuntu/leChauffeur/close_bot
-/home/ubuntu/leChauffeur/start_bot
+/home/ubuntu/discord_bot/leChauffeur/close_bot
+/home/ubuntu/discord_bot/leChauffeur/start_bot
