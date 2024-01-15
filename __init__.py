@@ -1,11 +1,13 @@
 # discord imports
 import discord
 from discord.ext import commands
+from discord import app_commands
 
 # global imports
-import time, random, contextlib, io, shutil, os, requests, sys, asyncio, webbrowser, threading
+import time, random, contextlib, io, shutil, os, requests, sys, asyncio, webbrowser, threading, datetime, pytz
 import importlib as imp
 from PIL import Image, ImageDraw
+from typing import Optional
 
 # import listener
 from commands import *
@@ -15,10 +17,33 @@ from events import *
 from lib import *
 
 intents = discord.Intents.all()
+MY_GUILD = 779434195784564787
 
-client = discord.Client(intents=intents)
+
+class MyClient(discord.Client):
+    def __init__(self, *, intents: discord.Intents):
+        super().__init__(intents=intents)
+        # A CommandTree is a special type that holds all the application command
+        # state required to make it work. This is a separate class because it
+        # allows all the extra state to be opt-in.
+        # Whenever you want to work with application commands, your tree is used
+        # to store and work with them.
+        # Note: When using commands.Bot instead of discord.Client, the bot will
+        # maintain its own tree instead.
+        self.tree = app_commands.CommandTree(self)
+
+    # In this basic example, we just synchronize the app commands to one guild.
+    # Instead of specifying a guild to every command, we copy over our global commands instead.
+    # By doing so, we don't have to wait up to an hour until they are shown to the end-user.
+    async def setup_hook(self):
+        # This copies the global commands over to your guild.
+        self.tree.copy_global_to(guild=MY_GUILD)
+        await self.tree.sync(guild=MY_GUILD)
+
+
+client = MyClient(intents=intents)
 leChauffeur = commands.Bot(command_prefix='stp ', intents=intents)
-
+leChauffeur.client = client
 leChauffeur.remove_command('help')
 
 # adding events_listener
@@ -30,7 +55,6 @@ event_listener = [emote_only_listener.emote_only_listener(leChauffeur),
                   on_ready.on_ready(leChauffeur),
                   reactions_listener.reactions_listener(leChauffeur),
                   RoleIncrementor.RoleIncrementor(leChauffeur)]
-
 
 # adding commands_listener
 command_listener = [active_react.active_react(leChauffeur),
@@ -48,9 +72,9 @@ command_listener = [active_react.active_react(leChauffeur),
                     send.send(leChauffeur),
                     shifumi.shifumi(leChauffeur),
                     test.test(leChauffeur),
+                    timestamp.timestamp(leChauffeur),
                     titan.titan(leChauffeur),
                     voice_admin.voice_admin(leChauffeur)]
-
 
 if __name__ == '__main__':
 
@@ -60,4 +84,4 @@ if __name__ == '__main__':
     for command in command_listener:
         asyncio.run(leChauffeur.add_cog(command))
 
-    leChauffeur.run(os.environ['token_Chauffeur'])
+    leChauffeur.run("Nzc5NDM0MTk1Nzg0NTY0Nzg3.GZbW6W.ldvh5LHBeFUDYQHGsiT-P8lF5KQkS0A2eFPAjc")

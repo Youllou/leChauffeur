@@ -15,10 +15,11 @@ class on_ready(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        gw2 = self.leChauffeur.get_guild(818160428294471700)
-        self.leChauffeur.me = gw2.get_member(280464892258025473)
-        quebec = gw2.get_role(1011287598230159410)
-        touriste = gw2.get_role(819875308987351041)
+        #gw2 = self.leChauffeur.get_guild(818160428294471700)
+        #self.leChauffeur.me = gw2.get_member(280464892258025473)
+        #quebec = gw2.get_role(1011287598230159410)
+        #touriste = gw2.get_role(819875308987351041)
+        await self.leChauffeur.tree.sync()
         guilds = self.leChauffeur.guilds
         for i in guilds:
             if str(i.id) not in os.listdir("./assets"):
@@ -31,3 +32,4 @@ class on_ready(commands.Cog):
                         if type(j) == discord.TextChannel:
                             await j.send(msg)
                             break
+        print('Logged on as', self.leChauffeur.user)
