@@ -33,4 +33,4 @@ class getLog(commands.Cog):
         if 280464892258025473 == interaction.user.id:
             await interaction.response.send_message("Syncing...")
             await self.leChauffeur.tree.sync()
-            await interaction.edit_original_message(content="Synced!")
+            await interaction.response.edit_message(content="Synced!")
