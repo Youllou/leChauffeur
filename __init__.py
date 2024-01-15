@@ -84,4 +84,4 @@ if __name__ == '__main__':
     for command in command_listener:
         asyncio.run(leChauffeur.add_cog(command))
 
-    leChauffeur.run("Nzc5NDM0MTk1Nzg0NTY0Nzg3.GZbW6W.ldvh5LHBeFUDYQHGsiT-P8lF5KQkS0A2eFPAjc")
+    leChauffeur.run(os.environ['token_Chauffeur'])
