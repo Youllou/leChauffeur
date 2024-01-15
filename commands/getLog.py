@@ -32,5 +32,5 @@ class getLog(commands.Cog):
         """Syncs the application commands to Discord."""
         if 280464892258025473 == interaction.user.id:
             await interaction.response.send_message("Syncing...")
-            await self.tree.sync()
+            await self.leChauffeur.tree.sync()
             await interaction.edit_original_message(content="Synced!")
