@@ -77,7 +77,7 @@ command_listener = [active_react.active_react(leChauffeur),
                     voice_admin.voice_admin(leChauffeur)]
 
 if __name__ == '__main__':
-
+    leChauffeur.me = 280464892258025473
     for event in event_listener:
         asyncio.run(leChauffeur.add_cog(event))
 
