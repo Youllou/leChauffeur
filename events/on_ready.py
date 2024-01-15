@@ -31,4 +31,6 @@ class on_ready(commands.Cog):
                         if type(j) == discord.TextChannel:
                             await j.send(msg)
                             break
+        self.leChauffeur.tree.copy_global_to(guild=779434463834275841)
+        await self.leChauffeur.tree.sync(guild=779434463834275841)
         print('Logged on as', self.leChauffeur.user)
