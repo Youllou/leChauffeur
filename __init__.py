@@ -47,7 +47,8 @@ leChauffeur.client = client
 leChauffeur.remove_command('help')
 
 # adding events_listener
-event_listener = [emote_only_listener.emote_only_listener(leChauffeur),
+event_listener = [clean_embed.clean_embed(leChauffeur),
+                  emote_only_listener.emote_only_listener(leChauffeur),
                   on_error.on_error(leChauffeur),
                   on_guild_join.on_guild_join(leChauffeur),
                   on_guild_remove.on_guild_remove(leChauffeur),
@@ -84,4 +85,5 @@ if __name__ == '__main__':
     for command in command_listener:
         asyncio.run(leChauffeur.add_cog(command))
 
+    # leChauffeur.run('this is not my token')
     leChauffeur.run(os.environ['token_Chauffeur'])

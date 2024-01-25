@@ -1,3 +1,4 @@
+from . import clean_embed
 from . import emote_only_listener
 from . import on_error
 from . import on_guild_join
