@@ -13,7 +13,6 @@ from lib import *
 
 def tweet_has_video(tweet):
     data = requests.get(tweet.replace("vxtwitter.com", "api.vxtwitter.com")).json()
-    print(data)
     if "error" in data:
         return False
     elif len(data["media_extended"]) > 0:
