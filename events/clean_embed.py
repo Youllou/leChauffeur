@@ -16,7 +16,7 @@ def tweet_has_video(tweet):
     if "error" in data:
         return False
     elif len(data["media_extended"]) > 0:
-        if any([x["type"] == "video" for x in data["media_extended"]]):
+        if any([(x["type"] == "video" or x["type"] == "gif") for x in data["media_extended"]]):
             return True
     return False
 
