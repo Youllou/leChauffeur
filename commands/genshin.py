@@ -8,9 +8,10 @@ class genshin(commands.Cog):
         self.leChauffeur = bot
 
     @commands.command()
-    async def genshin(self, ctx, code):
+    async def genshin(self, ctx, *codes):
         #delete message
         await ctx.message.delete()
-        url = f'https://genshin.mihoyo.com/en/gift?code={code}'
-        sentence = f"Merci {ctx.author.mention} d'avoir partagé le code {code} !\nVoici le lien pour avoir la récompense : {url}"
-        await ctx.send(sentence)
+        for code in codes:
+            url = f'https://genshin.mihoyo.com/en/gift?code={code}'
+            sentence = f"Merci {ctx.author.mention} d'avoir partagé le code {code} !\nVoici le lien pour avoir la récompense : {url}"
+            await ctx.send(sentence)
